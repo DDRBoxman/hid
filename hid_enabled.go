@@ -165,7 +165,9 @@ func (dev *Device) Write(b []byte) (int, error) {
 	// Prepend a HID report ID on Windows, other OSes don't need it
 	var report []byte
 	if runtime.GOOS == "windows" {
-		report = append([]byte{0x00}, b...)
+		// report = append([]byte{0x00}, b...)
+		// Just sending bytes works on Windows 10
+		report = b
 	} else {
 		report = b
 	}
